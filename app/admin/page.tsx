@@ -5,9 +5,9 @@ import type { StreamData, VoteData, LeaderboardEntry, QuestionForClient } from "
 
 const OPTION_LABELS = ["A", "B", "C"];
 const OPTION_COLORS = [
-  "from-blue-500 to-blue-400",
-  "from-emerald-500 to-emerald-400",
   "from-amber-500 to-amber-400",
+  "from-stone-500 to-stone-400",
+  "from-orange-500 to-orange-400",
 ];
 const MEDALS = ["🥇", "🥈", "🥉"];
 
@@ -39,13 +39,13 @@ export default function AdminPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-violet-950 to-slate-900 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-br from-stone-900 via-amber-950 to-stone-800 text-white p-6">
       <div className="max-w-5xl mx-auto space-y-8">
 
         {/* ヘッダー */}
         <div className="fade-in flex items-center justify-between">
           <div>
-            <p className="text-violet-400 text-xs font-semibold tracking-widest uppercase mb-1">Dashboard</p>
+            <p className="text-amber-400 text-xs font-semibold tracking-widest uppercase mb-1">Dashboard</p>
             <h1 className="text-3xl font-bold text-white">管理者画面</h1>
           </div>
           <div className="flex items-center gap-3">
@@ -67,7 +67,7 @@ export default function AdminPage() {
         </div>
 
         {/* ランキング */}
-        <section className="fade-in backdrop-blur-md bg-white/5 border border-white/10 rounded-3xl p-6 space-y-4">
+        <section className="fade-in backdrop-blur-md bg-amber-50/5 border border-amber-200/10 rounded-3xl p-6 space-y-4">
           <div className="flex items-center gap-2">
             <span className="text-lg">🏆</span>
             <h2 className="text-lg font-bold text-white">ランキング Top 3</h2>
@@ -105,10 +105,10 @@ export default function AdminPage() {
 
 function RankCard({ entry }: { entry: LeaderboardEntry }) {
   return (
-    <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-5 text-center space-y-2">
+    <div className="backdrop-blur-md bg-amber-50/5 border border-amber-200/10 rounded-2xl p-5 text-center space-y-2">
       <div className="text-3xl">{MEDALS[entry.rank - 1]}</div>
       <div className="font-bold text-white truncate">{entry.name}</div>
-      <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-violet-400 bg-clip-text text-transparent">
+      <div className="text-2xl font-bold bg-gradient-to-r from-amber-300 to-stone-300 bg-clip-text text-transparent">
         {entry.score}<span className="text-sm ml-0.5">点</span>
       </div>
     </div>
@@ -121,10 +121,10 @@ function VoteCard({ question, vote }: { question: QuestionForClient; vote?: Vote
   const maxCount = Math.max(...counts, 1);
 
   return (
-    <div className="fade-in backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-5 space-y-4">
+    <div className="fade-in backdrop-blur-md bg-amber-50/5 border border-amber-200/10 rounded-2xl p-5 space-y-4">
       <div className="flex justify-between items-start">
         <div className="space-y-1">
-          <span className="text-xs text-violet-400 font-semibold">Q{question.id}</span>
+          <span className="text-xs text-amber-400 font-semibold">Q{question.id}</span>
           <p className="font-semibold text-white">{question.text}</p>
         </div>
         <span className="text-xs bg-white/10 border border-white/10 rounded-full px-3 py-1 text-white/50 whitespace-nowrap ml-4">

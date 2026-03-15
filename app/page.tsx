@@ -90,16 +90,16 @@ export default function Home() {
   const progress = questions.length > 0 ? ((currentIndex + 1) / questions.length) * 100 : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-800 to-pink-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-100 to-amber-100 flex items-center justify-center p-4">
       <div className="w-full max-w-lg">
 
         {/* 登録画面 */}
         {phase === "register" && (
-          <div className="fade-in backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-10 text-center space-y-6">
+          <div className="fade-in backdrop-blur-md bg-white/80 border border-amber-200/60 rounded-3xl shadow-xl p-10 text-center space-y-6">
             <div className="space-y-2">
-              <p className="text-pink-300 text-sm font-semibold tracking-widest uppercase">Welcome</p>
-              <h1 className="text-4xl font-bold text-white">クイズ大会</h1>
-              <p className="text-white/60 text-sm">名前を入力して参加してください</p>
+              <p className="text-amber-600 text-sm font-semibold tracking-widest uppercase">Welcome</p>
+              <h1 className="text-4xl font-bold text-stone-800">クイズ大会</h1>
+              <p className="text-stone-400 text-sm">名前を入力して参加してください</p>
             </div>
             <input
               type="text"
@@ -107,14 +107,14 @@ export default function Home() {
               onChange={(e) => setName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleRegister()}
               placeholder="あなたの名前"
-              className="w-full bg-white/10 border border-white/30 rounded-2xl px-5 py-4 text-white placeholder-white/40 text-lg focus:outline-none focus:border-pink-400 focus:bg-white/15 transition"
+              className="w-full bg-white/60 border border-amber-300 rounded-2xl px-5 py-4 text-stone-800 placeholder-stone-400 text-lg focus:outline-none focus:border-amber-500 focus:bg-white/80 transition"
               maxLength={20}
             />
-            {error && <p className="text-pink-300 text-sm">{error}</p>}
+            {error && <p className="text-rose-500 text-sm">{error}</p>}
             <button
               onClick={handleRegister}
               disabled={loading}
-              className="w-full bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-400 hover:to-violet-400 text-white font-bold py-4 rounded-2xl text-lg transition shadow-lg shadow-pink-500/30 disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-amber-600 to-stone-600 hover:from-amber-500 hover:to-stone-500 text-white font-bold py-4 rounded-2xl text-lg transition shadow-lg shadow-amber-500/20 disabled:opacity-50"
             >
               {loading ? "参加中..." : "参加する →"}
             </button>
@@ -125,23 +125,23 @@ export default function Home() {
         {phase === "quiz" && currentQ && (
           <div className="fade-in space-y-4">
             {/* ヘッダー情報 */}
-            <div className="flex justify-between items-center text-white/70 text-sm px-1">
+            <div className="flex justify-between items-center text-stone-500 text-sm px-1">
               <span className="font-medium">{name} さん</span>
-              <span className="bg-white/10 border border-white/20 rounded-full px-3 py-1">
-                {currentIndex + 1} <span className="text-white/40">/</span> {questions.length}
+              <span className="bg-amber-100/80 border border-amber-200 rounded-full px-3 py-1 text-stone-500">
+                {currentIndex + 1} <span className="text-stone-400">/</span> {questions.length}
               </span>
             </div>
 
             {/* プログレスバー */}
-            <div className="w-full bg-white/10 rounded-full h-1.5">
+            <div className="w-full bg-stone-200 rounded-full h-1.5">
               <div
-                className="bg-gradient-to-r from-pink-400 to-violet-400 h-1.5 rounded-full transition-all duration-500"
+                className="bg-gradient-to-r from-amber-400 to-stone-500 h-1.5 rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
 
             {/* 問題カード */}
-            <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-7 space-y-5">
+            <div className="backdrop-blur-md bg-white/80 border border-amber-200/60 rounded-3xl shadow-xl p-7 space-y-5">
               {currentQ.image && (
                 <div className="rounded-2xl overflow-hidden">
                   <Image
@@ -154,7 +154,7 @@ export default function Home() {
                 </div>
               )}
 
-              <h2 className="text-xl font-bold text-white leading-relaxed">{currentQ.text}</h2>
+              <h2 className="text-xl font-bold text-stone-800 leading-relaxed">{currentQ.text}</h2>
 
               {/* 選択肢 */}
               <div className="space-y-3">
@@ -163,16 +163,16 @@ export default function Home() {
 
                   if (result) {
                     if (i === result.correctIndex) {
-                      cls += "border-emerald-400 bg-emerald-400/20 text-emerald-200";
+                      cls += "border-emerald-400 bg-emerald-50 text-emerald-700";
                     } else if (i === selected && !result.correct) {
-                      cls += "border-rose-400 bg-rose-400/20 text-rose-300";
+                      cls += "border-rose-400 bg-rose-50 text-rose-600";
                     } else {
-                      cls += "border-white/10 bg-white/5 text-white/30";
+                      cls += "border-stone-200 bg-stone-50 text-stone-400";
                     }
                   } else if (selected === i) {
-                    cls += "border-pink-400 bg-pink-400/20 text-white";
+                    cls += "border-amber-500 bg-amber-50 text-stone-800";
                   } else {
-                    cls += "border-white/20 bg-white/5 text-white/80 hover:border-white/40 hover:bg-white/10";
+                    cls += "border-stone-200 bg-white/60 text-stone-700 hover:border-amber-400 hover:bg-amber-50/50";
                   }
 
                   return (
@@ -182,7 +182,7 @@ export default function Home() {
                       disabled={!!result}
                       className={cls}
                     >
-                      <span className="inline-block w-7 text-pink-300 font-bold mr-2">
+                      <span className="inline-block w-7 text-amber-600 font-bold mr-2">
                         {OPTION_LABELS[i]}.
                       </span>
                       {opt}
@@ -196,14 +196,14 @@ export default function Home() {
                 <div className="fade-in space-y-3">
                   <div className={`text-center py-3 rounded-2xl font-bold text-lg ${
                     result.correct
-                      ? "bg-emerald-400/20 text-emerald-300 border border-emerald-400/30"
-                      : "bg-rose-400/20 text-rose-300 border border-rose-400/30"
+                      ? "bg-emerald-50 text-emerald-700 border border-emerald-300"
+                      : "bg-rose-50 text-rose-600 border border-rose-300"
                   }`}>
                     {result.correct ? "✓ 正解！" : "✗ 不正解..."}
                   </div>
                   {currentQ.explanation && (
-                    <div className="bg-white/5 border border-white/15 rounded-2xl px-5 py-4 text-sm text-white/70 leading-relaxed">
-                      <span className="text-violet-300 font-semibold mr-2">解説</span>
+                    <div className="bg-amber-50/80 border border-amber-200 rounded-2xl px-5 py-4 text-sm text-stone-600 leading-relaxed">
+                      <span className="text-amber-700 font-semibold mr-2">解説</span>
                       {currentQ.explanation}
                     </div>
                   )}
@@ -215,14 +215,14 @@ export default function Home() {
                 <button
                   onClick={handleSubmit}
                   disabled={selected === null || loading}
-                  className="w-full bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-400 hover:to-violet-400 text-white font-bold py-4 rounded-2xl text-lg transition shadow-lg shadow-pink-500/30 disabled:opacity-30 disabled:shadow-none"
+                  className="w-full bg-gradient-to-r from-amber-600 to-stone-600 hover:from-amber-500 hover:to-stone-500 text-white font-bold py-4 rounded-2xl text-lg transition shadow-lg shadow-amber-500/20 disabled:opacity-30 disabled:shadow-none"
                 >
                   {loading ? "送信中..." : "回答する"}
                 </button>
               ) : (
                 <button
                   onClick={handleNext}
-                  className="w-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold py-4 rounded-2xl text-lg transition"
+                  className="w-full bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-700 font-bold py-4 rounded-2xl text-lg transition"
                 >
                   {isLastQuestion ? "結果を見る →" : "次の問題 →"}
                 </button>
@@ -233,20 +233,20 @@ export default function Home() {
 
         {/* 完了画面 */}
         {phase === "done" && (
-          <div className="fade-in backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-10 text-center space-y-6">
+          <div className="fade-in backdrop-blur-md bg-white/80 border border-amber-200/60 rounded-3xl shadow-xl p-10 text-center space-y-6">
             <div className="text-6xl">🎉</div>
             <div className="space-y-1">
-              <h1 className="text-2xl font-bold text-white">お疲れ様でした！</h1>
-              <p className="text-white/60 text-sm">{name} さんの結果</p>
+              <h1 className="text-2xl font-bold text-stone-800">お疲れ様でした！</h1>
+              <p className="text-stone-400 text-sm">{name} さんの結果</p>
             </div>
-            <div className="bg-white/10 border border-white/20 rounded-2xl py-8">
-              <p className="text-white/50 text-sm mb-2">あなたの得点</p>
-              <p className="text-6xl font-bold text-white">
+            <div className="bg-amber-50 border border-amber-200/60 rounded-2xl py-8">
+              <p className="text-stone-400 text-sm mb-2">あなたの得点</p>
+              <p className="text-6xl font-bold text-stone-800">
                 {finalScore}
-                <span className="text-2xl ml-2 text-pink-300">点</span>
+                <span className="text-2xl ml-2 text-amber-600">点</span>
               </p>
             </div>
-            <p className="text-white/40 text-sm">管理者画面でランキングをご確認ください</p>
+            <p className="text-stone-400 text-sm">管理者画面でランキングをご確認ください</p>
           </div>
         )}
 
