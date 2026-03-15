@@ -193,12 +193,20 @@ export default function Home() {
 
               {/* 正誤フィードバック */}
               {result && (
-                <div className={`fade-in text-center py-3 rounded-2xl font-bold text-lg ${
-                  result.correct
-                    ? "bg-emerald-400/20 text-emerald-300 border border-emerald-400/30"
-                    : "bg-rose-400/20 text-rose-300 border border-rose-400/30"
-                }`}>
-                  {result.correct ? "✓ 正解！" : "✗ 不正解..."}
+                <div className="fade-in space-y-3">
+                  <div className={`text-center py-3 rounded-2xl font-bold text-lg ${
+                    result.correct
+                      ? "bg-emerald-400/20 text-emerald-300 border border-emerald-400/30"
+                      : "bg-rose-400/20 text-rose-300 border border-rose-400/30"
+                  }`}>
+                    {result.correct ? "✓ 正解！" : "✗ 不正解..."}
+                  </div>
+                  {currentQ.explanation && (
+                    <div className="bg-white/5 border border-white/15 rounded-2xl px-5 py-4 text-sm text-white/70 leading-relaxed">
+                      <span className="text-violet-300 font-semibold mr-2">解説</span>
+                      {currentQ.explanation}
+                    </div>
+                  )}
                 </div>
               )}
 

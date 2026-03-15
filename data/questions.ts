@@ -5,6 +5,7 @@ export type Question = {
   correctIndex: number; // 0〜2
   point: number;
   image?: string; // 画像パス (例: "/images/q1.jpg") — 省略可
+  explanation?: string; // 正誤発表後に表示する解説文 — 省略可
 };
 
 // ここを編集してクイズ問題を変更してください
@@ -72,7 +73,7 @@ export const QUESTIONS: Question[] = [
     id: 9,
     text: "プロポーズをした場所は？",
     options: ["京都", "長崎", "沖縄"],
-    correctIndex: 0,
+    correctIndex: 1,
     point: 10,
   },
   {
