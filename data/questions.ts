@@ -27,6 +27,7 @@ export const QUESTIONS: Question[] = [
     options: ["ブルテオンスタジアム", "おおきにアリーナ", "パナソニックアリーナ"],
     correctIndex: 2,
     point: 10,
+    explanation: "大阪ブルテオンの本拠地はパナソニックアリーナ（大阪府立体育会館）です。"
   },
   {
     id: 3,
@@ -34,6 +35,7 @@ export const QUESTIONS: Question[] = [
     options: ["チョコレートエキスパート", "チョコレートスペシャリスト", "チョコレートマイスター"],
     correctIndex: 1,
     point: 10,
+    explanation: "あさみはチョコレートスペシャリストの資格を持っています。"
   },
   {
     id: 4,
@@ -41,6 +43,7 @@ export const QUESTIONS: Question[] = [
     options: ["野球", "ピアノ", "囲碁"],
     correctIndex: 0,
     point: 10,
+    explanation: "とものりは野球の経験がありません。ピアノと囲碁は経験済みです。"
   },
   {
     id: 5,
@@ -48,6 +51,7 @@ export const QUESTIONS: Question[] = [
     options: ["AAA", "BBB", "CCC"],
     correctIndex: 0,
     point: 10,
+    explanation: "正解はAAAです。"
   },
   {
     id: 6,
@@ -55,6 +59,7 @@ export const QUESTIONS: Question[] = [
     options: ["男性ブランコ", "令和ロマン", "真空ジェシカ"],
     correctIndex: 2,
     point: 10,
+    explanation: "とものりの一番好きな芸人は真空ジェシカです。"
   },
   {
     id: 7,
@@ -62,6 +67,7 @@ export const QUESTIONS: Question[] = [
     options: ["3", "4", "5"],
     correctIndex: 1,
     point: 10,
+    explanation: "二人でこれまでに4か国の海外旅行を楽しみました。"
   },
   {
     id: 8,
@@ -69,6 +75,7 @@ export const QUESTIONS: Question[] = [
     options: ["のっくん", "とーくん", "のりちゃん"],
     correctIndex: 0,
     point: 10,
+    explanation: "あさみはとものりのことを「のっくん」と呼んでいます。"
   },
   {
     id: 9,
@@ -76,6 +83,7 @@ export const QUESTIONS: Question[] = [
     options: ["京都", "長崎", "沖縄"],
     correctIndex: 1,
     point: 10,
+    explanation: "プロポーズは長崎で行われました。"
   },
   {
     id: 10,
@@ -83,5 +91,6 @@ export const QUESTIONS: Question[] = [
     options: ["ハンバーグ", "オムライス", "キーマカレー"],
     correctIndex: 2,
     point: 10,
+    explanation: "とものりはあさみのキーマカレーが大好きです。"
   },
 ];
