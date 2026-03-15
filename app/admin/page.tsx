@@ -3,12 +3,11 @@
 import { useEffect, useState } from "react";
 import type { StreamData, VoteData, LeaderboardEntry, QuestionForClient } from "@/types";
 
-const OPTION_LABELS = ["A", "B", "C", "D"];
+const OPTION_LABELS = ["A", "B", "C"];
 const OPTION_COLORS = [
   "from-blue-500 to-blue-400",
   "from-emerald-500 to-emerald-400",
   "from-amber-500 to-amber-400",
-  "from-rose-500 to-rose-400",
 ];
 const MEDALS = ["🥇", "🥈", "🥉"];
 
@@ -117,7 +116,7 @@ function RankCard({ entry }: { entry: LeaderboardEntry }) {
 }
 
 function VoteCard({ question, vote }: { question: QuestionForClient; vote?: VoteData }) {
-  const counts = vote?.counts ?? [0, 0, 0, 0];
+  const counts = vote?.counts ?? [0, 0, 0];
   const total = counts.reduce((s, c) => s + c, 0);
   const maxCount = Math.max(...counts, 1);
 

@@ -2,7 +2,7 @@ export type Question = {
   id: number;
   text: string;
   options: string[];
-  correctIndex: number; // 0〜3
+  correctIndex: number; // 0〜2
   point: number;
   image?: string; // 画像パス (例: "/images/q1.jpg") — 省略可
 };
@@ -13,72 +13,72 @@ export type Question = {
 export const QUESTIONS: Question[] = [
   {
     id: 1,
-    text: "日本の首都はどこ？",
-    options: ["大阪", "東京", "京都", "名古屋"],
+    text: "あさみの中学時代の部活動は？",
+    options: ["水泳", "剣道", "バレーボール"],
     correctIndex: 1,
     point: 10,
     // image: "/images/q1.jpg",
   },
   {
     id: 2,
-    text: "世界で一番大きい大陸は？",
-    options: ["アフリカ", "北アメリカ", "ユーラシア", "南アメリカ"],
+    text: "あさみの推し大阪ブルテオンの本拠地は？",
+    options: ["ブルテオンスタジアム", "おおきにアリーナ", "パナソニックアリーナ"],
     correctIndex: 2,
     point: 10,
   },
   {
     id: 3,
-    text: "水の化学式は？",
-    options: ["CO2", "NaCl", "H2O", "O2"],
-    correctIndex: 2,
-    point: 10,
-  },
-  {
-    id: 4,
-    text: "1 + 1 = ?",
-    options: ["1", "2", "3", "4"],
+    text: "あさみの持っている資格は？",
+    options: ["チョコレートエキスパート", "チョコレートスペシャリスト", "チョコレートマイスター"],
     correctIndex: 1,
     point: 10,
   },
   {
+    id: 4,
+    text: "とものりが経験したことがないものは？",
+    options: ["野球", "ピアノ", "囲碁"],
+    correctIndex: 0,
+    point: 10,
+  },
+  {
     id: 5,
-    text: "富士山の高さは？",
-    options: ["3,776m", "3,500m", "4,000m", "3,200m"],
+    text: "とものりの好きなハイキューの名言は？",
+    options: ["AAA", "BBB", "CCC"],
     correctIndex: 0,
     point: 10,
   },
   {
     id: 6,
-    text: "太陽系で一番大きい惑星は？",
-    options: ["土星", "木星", "天王星", "海王星"],
-    correctIndex: 1,
+    text: "とものりの一番好きな芸人は？",
+    options: ["男性ブランコ", "令和ロマン", "真空ジェシカ"],
+    correctIndex: 2,
     point: 10,
   },
   {
     id: 7,
-    text: "オリンピックの輪は何色ある？",
-    options: ["4", "5", "6", "7"],
+    text: "二人で行った海外の数は？",
+    options: ["3", "4", "5"],
     correctIndex: 1,
     point: 10,
   },
   {
     id: 8,
-    text: "日本の国旗の色の組み合わせは？",
-    options: ["青と白", "赤と金", "赤と白", "緑と白"],
-    correctIndex: 2,
+    text: "あさみはとものりをなんと呼んでいる？",
+    options: ["のっくん", "とーくん", "のりちゃん"],
+    correctIndex: 0,
     point: 10,
   },
   {
     id: 9,
-    text: "1年は何日？",
-    options: ["364日", "365日", "366日", "360日"],
-    correctIndex: 1,
+    text: "プロポーズをした場所は？",
+    options: ["京都", "長崎", "沖縄"],
+    correctIndex: 0,
     point: 10,
   },
   {
     id: 10,
-    text: "人間の体で一番大きい臓器は？",
-    options: ["心臓", "肝臓", "皮膚", "肺"],
+    text: "あさみの手料理でとものりが一番好きなものは？",
+    options: ["ハンバーグ", "オムライス", "キーマカレー"],
     correctIndex: 2,
     point: 10,
   },

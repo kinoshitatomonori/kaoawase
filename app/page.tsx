@@ -6,7 +6,7 @@ import type { QuestionForClient, AnswerResponse } from "@/types";
 
 type Phase = "register" | "quiz" | "done";
 
-const OPTION_LABELS = ["A", "B", "C", "D"];
+const OPTION_LABELS = ["A", "B", "C"];
 
 export default function Home() {
   const [phase, setPhase] = useState<Phase>("register");
