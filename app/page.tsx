@@ -16,7 +16,7 @@ export default function Home() {
   const [result, setResult] = useState<AnswerResponse | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [totalScore, setTotalScore] = useState(0);
+  const [finalScore, setFinalScore] = useState(0);
 
   async function handleRegister() {
     if (!name.trim()) {
@@ -26,23 +26,28 @@ export default function Home() {
     setLoading(true);
     setError("");
 
-    const res = await fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
-    });
-    const data = await res.json();
+    const [regRes, qRes] = await Promise.all([
+      fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name }),
+      }),
+      fetch("/api/questions"),
+    ]);
 
-    if (!res.ok) {
+    if (!regRes.ok) {
+      const data = await regRes.json();
       setError(data.error);
       setLoading(false);
       return;
     }
 
-    setParticipantId(data.participantId);
+    const [regData, qs] = await Promise.all([
+      regRes.json(),
+      qRes.json() as Promise<QuestionForClient[]>,
+    ]);
 
-    const qRes = await fetch("/api/questions");
-    const qs: QuestionForClient[] = await qRes.json();
+    setParticipantId(regData.participantId);
     setQuestions(qs);
     setLoading(false);
     setPhase("quiz");
@@ -63,12 +68,14 @@ export default function Home() {
     });
     const data: AnswerResponse = await res.json();
     setResult(data);
-    setTotalScore(data.currentScore);
     setLoading(false);
   }
 
+  const isLastQuestion = currentIndex + 1 >= questions.length;
+
   function handleNext() {
-    if (currentIndex + 1 >= questions.length) {
+    if (isLastQuestion) {
+      setFinalScore(result?.currentScore ?? 0);
       setPhase("done");
     } else {
       setCurrentIndex((i) => i + 1);
@@ -207,7 +214,7 @@ export default function Home() {
                 onClick={handleNext}
                 className="w-full bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 rounded-xl text-lg transition"
               >
-                {currentIndex + 1 >= questions.length ? "結果を見る" : "次の問題"}
+                {isLastQuestion ? "結果を見る" : "次の問題"}
               </button>
             )}
           </div>
@@ -224,7 +231,7 @@ export default function Home() {
             <div className="bg-indigo-50 rounded-2xl py-8">
               <p className="text-gray-500 text-sm mb-1">あなたの得点</p>
               <p className="text-5xl font-bold text-indigo-700">
-                {totalScore}
+                {finalScore}
                 <span className="text-xl ml-1 text-indigo-400">点</span>
               </p>
             </div>

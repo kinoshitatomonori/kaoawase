@@ -28,9 +28,14 @@ export function removeClient(
   getClients().delete(controller);
 }
 
+const encoder = new TextEncoder();
+
+export function encodeSSE(data: StreamData): Uint8Array {
+  return encoder.encode(`data: ${JSON.stringify(data)}\n\n`);
+}
+
 export function broadcast(data: StreamData) {
-  const message = `data: ${JSON.stringify(data)}\n\n`;
-  const encoded = new TextEncoder().encode(message);
+  const encoded = encodeSSE(data);
   const dead: ReadableStreamDefaultController<Uint8Array>[] = [];
 
   for (const controller of getClients()) {

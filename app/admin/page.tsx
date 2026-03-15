@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { StreamData, VoteData, LeaderboardEntry } from "@/types";
+import type { StreamData, VoteData, LeaderboardEntry, QuestionForClient } from "@/types";
 
 const OPTION_LABELS = ["A", "B", "C", "D"];
 const OPTION_COLORS = [
@@ -10,10 +10,11 @@ const OPTION_COLORS = [
   "bg-yellow-500",
   "bg-red-500",
 ];
+const MEDALS = ["🥇", "🥈", "🥉"];
 
 export default function AdminPage() {
   const [data, setData] = useState<StreamData | null>(null);
-  const [questions, setQuestions] = useState<{ id: number; text: string; options: string[] }[]>([]);
+  const [questions, setQuestions] = useState<QuestionForClient[]>([]);
   const [connected, setConnected] = useState(false);
   const [resetting, setResetting] = useState(false);
 
@@ -99,10 +100,9 @@ export default function AdminPage() {
 }
 
 function RankCard({ entry }: { entry: LeaderboardEntry }) {
-  const medals = ["🥇", "🥈", "🥉"];
   return (
     <div className="bg-gray-700 rounded-xl p-4 text-center space-y-1">
-      <div className="text-3xl">{medals[entry.rank - 1]}</div>
+      <div className="text-3xl">{MEDALS[entry.rank - 1]}</div>
       <div className="font-bold text-lg text-white truncate">{entry.name}</div>
       <div className="text-yellow-400 font-bold text-xl">{entry.score}点</div>
     </div>
@@ -113,7 +113,7 @@ function VoteCard({
   question,
   vote,
 }: {
-  question: { id: number; text: string; options: string[] };
+  question: QuestionForClient;
   vote?: VoteData;
 }) {
   const counts = vote?.counts ?? [0, 0, 0, 0];

@@ -4,13 +4,8 @@ export type RegisterResponse = {
   participantId: string;
 };
 
-export type QuestionForClient = {
-  id: number;
-  text: string;
-  options: string[];
-  point: number;
-  image?: string;
-};
+import type { Question } from "@/data/questions";
+export type QuestionForClient = Omit<Question, "correctIndex">;
 
 export type AnswerRequest = {
   participantId: string;
