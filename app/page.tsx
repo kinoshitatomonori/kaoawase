@@ -6,6 +6,8 @@ import type { QuestionForClient, AnswerResponse } from "@/types";
 
 type Phase = "register" | "quiz" | "done";
 
+const OPTION_LABELS = ["A", "B", "C", "D"];
+
 export default function Home() {
   const [phase, setPhase] = useState<Phase>("register");
   const [name, setName] = useState("");
@@ -85,161 +87,161 @@ export default function Home() {
   }
 
   const currentQ = questions[currentIndex];
+  const progress = questions.length > 0 ? ((currentIndex + 1) / questions.length) * 100 : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-lg w-full max-w-lg p-8">
+    <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-800 to-pink-800 flex items-center justify-center p-4">
+      <div className="w-full max-w-lg">
 
         {/* 登録画面 */}
         {phase === "register" && (
-          <div className="space-y-6 text-center">
-            <h1 className="text-3xl font-bold text-indigo-700">クイズ大会</h1>
-            <p className="text-gray-500">名前を入力して参加してください</p>
+          <div className="fade-in backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-10 text-center space-y-6">
+            <div className="space-y-2">
+              <p className="text-pink-300 text-sm font-semibold tracking-widest uppercase">Welcome</p>
+              <h1 className="text-4xl font-bold text-white">クイズ大会</h1>
+              <p className="text-white/60 text-sm">名前を入力して参加してください</p>
+            </div>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleRegister()}
               placeholder="あなたの名前"
-              className="w-full border-2 border-indigo-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:border-indigo-500"
+              className="w-full bg-white/10 border border-white/30 rounded-2xl px-5 py-4 text-white placeholder-white/40 text-lg focus:outline-none focus:border-pink-400 focus:bg-white/15 transition"
               maxLength={20}
             />
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-pink-300 text-sm">{error}</p>}
             <button
               onClick={handleRegister}
               disabled={loading}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-lg transition disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-400 hover:to-violet-400 text-white font-bold py-4 rounded-2xl text-lg transition shadow-lg shadow-pink-500/30 disabled:opacity-50"
             >
-              {loading ? "登録中..." : "参加する"}
+              {loading ? "参加中..." : "参加する →"}
             </button>
           </div>
         )}
 
         {/* クイズ画面 */}
         {phase === "quiz" && currentQ && (
-          <div className="space-y-5">
-            <div className="flex justify-between text-sm text-gray-400">
-              <span>{name} さん</span>
-              <span>
-                問題 {currentIndex + 1} / {questions.length}
+          <div className="fade-in space-y-4">
+            {/* ヘッダー情報 */}
+            <div className="flex justify-between items-center text-white/70 text-sm px-1">
+              <span className="font-medium">{name} さん</span>
+              <span className="bg-white/10 border border-white/20 rounded-full px-3 py-1">
+                {currentIndex + 1} <span className="text-white/40">/</span> {questions.length}
               </span>
             </div>
 
             {/* プログレスバー */}
-            <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="w-full bg-white/10 rounded-full h-1.5">
               <div
-                className="bg-indigo-500 h-2 rounded-full transition-all"
-                style={{
-                  width: `${((currentIndex + 1) / questions.length) * 100}%`,
-                }}
+                className="bg-gradient-to-r from-pink-400 to-violet-400 h-1.5 rounded-full transition-all duration-500"
+                style={{ width: `${progress}%` }}
               />
             </div>
 
-            {/* 問題画像 */}
-            {currentQ.image && (
-              <div className="rounded-xl overflow-hidden">
-                <Image
-                  src={currentQ.image}
-                  alt={`問題${currentIndex + 1}の画像`}
-                  width={480}
-                  height={270}
-                  className="w-full object-cover"
-                />
-              </div>
-            )}
+            {/* 問題カード */}
+            <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-7 space-y-5">
+              {currentQ.image && (
+                <div className="rounded-2xl overflow-hidden">
+                  <Image
+                    src={currentQ.image}
+                    alt={`問題${currentIndex + 1}の画像`}
+                    width={480}
+                    height={270}
+                    className="w-full object-cover"
+                  />
+                </div>
+              )}
 
-            <h2 className="text-xl font-bold text-gray-800">{currentQ.text}</h2>
+              <h2 className="text-xl font-bold text-white leading-relaxed">{currentQ.text}</h2>
 
-            {/* 選択肢 */}
-            <div className="grid grid-cols-1 gap-3">
-              {currentQ.options.map((opt, i) => {
-                let btnClass =
-                  "w-full text-left px-5 py-4 rounded-xl border-2 font-medium text-gray-700 transition ";
+              {/* 選択肢 */}
+              <div className="space-y-3">
+                {currentQ.options.map((opt, i) => {
+                  let cls = "w-full text-left px-5 py-4 rounded-2xl border font-medium transition-all ";
 
-                if (result) {
-                  if (i === result.correctIndex) {
-                    btnClass += "border-green-500 bg-green-50 text-green-700";
-                  } else if (i === selected && !result.correct) {
-                    btnClass += "border-red-400 bg-red-50 text-red-600";
+                  if (result) {
+                    if (i === result.correctIndex) {
+                      cls += "border-emerald-400 bg-emerald-400/20 text-emerald-200";
+                    } else if (i === selected && !result.correct) {
+                      cls += "border-rose-400 bg-rose-400/20 text-rose-300";
+                    } else {
+                      cls += "border-white/10 bg-white/5 text-white/30";
+                    }
+                  } else if (selected === i) {
+                    cls += "border-pink-400 bg-pink-400/20 text-white";
                   } else {
-                    btnClass += "border-gray-200 bg-gray-50 text-gray-400";
+                    cls += "border-white/20 bg-white/5 text-white/80 hover:border-white/40 hover:bg-white/10";
                   }
-                } else if (selected === i) {
-                  btnClass += "border-indigo-500 bg-indigo-50 text-indigo-700";
-                } else {
-                  btnClass +=
-                    "border-gray-200 hover:border-indigo-300 hover:bg-indigo-50";
-                }
 
-                return (
-                  <button
-                    key={i}
-                    onClick={() => !result && setSelected(i)}
-                    disabled={!!result}
-                    className={btnClass}
-                  >
-                    <span className="inline-block w-6 font-bold text-indigo-400 mr-2">
-                      {["A", "B", "C", "D"][i]}.
-                    </span>
-                    {opt}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* 正誤フィードバック */}
-            {result && (
-              <div
-                className={`text-center py-3 rounded-xl font-bold text-lg ${
-                  result.correct
-                    ? "bg-green-100 text-green-700"
-                    : "bg-red-100 text-red-600"
-                }`}
-              >
-                {result.correct ? "正解！" : "不正解..."}
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => !result && setSelected(i)}
+                      disabled={!!result}
+                      className={cls}
+                    >
+                      <span className="inline-block w-7 text-pink-300 font-bold mr-2">
+                        {OPTION_LABELS[i]}.
+                      </span>
+                      {opt}
+                    </button>
+                  );
+                })}
               </div>
-            )}
 
-            {/* ボタン */}
-            {!result ? (
-              <button
-                onClick={handleSubmit}
-                disabled={selected === null || loading}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-lg transition disabled:opacity-40"
-              >
-                {loading ? "送信中..." : "回答する"}
-              </button>
-            ) : (
-              <button
-                onClick={handleNext}
-                className="w-full bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 rounded-xl text-lg transition"
-              >
-                {isLastQuestion ? "結果を見る" : "次の問題"}
-              </button>
-            )}
+              {/* 正誤フィードバック */}
+              {result && (
+                <div className={`fade-in text-center py-3 rounded-2xl font-bold text-lg ${
+                  result.correct
+                    ? "bg-emerald-400/20 text-emerald-300 border border-emerald-400/30"
+                    : "bg-rose-400/20 text-rose-300 border border-rose-400/30"
+                }`}>
+                  {result.correct ? "✓ 正解！" : "✗ 不正解..."}
+                </div>
+              )}
+
+              {/* アクションボタン */}
+              {!result ? (
+                <button
+                  onClick={handleSubmit}
+                  disabled={selected === null || loading}
+                  className="w-full bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-400 hover:to-violet-400 text-white font-bold py-4 rounded-2xl text-lg transition shadow-lg shadow-pink-500/30 disabled:opacity-30 disabled:shadow-none"
+                >
+                  {loading ? "送信中..." : "回答する"}
+                </button>
+              ) : (
+                <button
+                  onClick={handleNext}
+                  className="w-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold py-4 rounded-2xl text-lg transition"
+                >
+                  {isLastQuestion ? "結果を見る →" : "次の問題 →"}
+                </button>
+              )}
+            </div>
           </div>
         )}
 
         {/* 完了画面 */}
         {phase === "done" && (
-          <div className="text-center space-y-6">
+          <div className="fade-in backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-10 text-center space-y-6">
             <div className="text-6xl">🎉</div>
-            <h1 className="text-2xl font-bold text-gray-800">
-              お疲れ様でした！
-            </h1>
-            <p className="text-gray-500">{name} さんの結果</p>
-            <div className="bg-indigo-50 rounded-2xl py-8">
-              <p className="text-gray-500 text-sm mb-1">あなたの得点</p>
-              <p className="text-5xl font-bold text-indigo-700">
+            <div className="space-y-1">
+              <h1 className="text-2xl font-bold text-white">お疲れ様でした！</h1>
+              <p className="text-white/60 text-sm">{name} さんの結果</p>
+            </div>
+            <div className="bg-white/10 border border-white/20 rounded-2xl py-8">
+              <p className="text-white/50 text-sm mb-2">あなたの得点</p>
+              <p className="text-6xl font-bold text-white">
                 {finalScore}
-                <span className="text-xl ml-1 text-indigo-400">点</span>
+                <span className="text-2xl ml-2 text-pink-300">点</span>
               </p>
             </div>
-            <p className="text-gray-400 text-sm">
-              管理者画面でランキングをご確認ください
-            </p>
+            <p className="text-white/40 text-sm">管理者画面でランキングをご確認ください</p>
           </div>
         )}
+
       </div>
     </div>
   );
