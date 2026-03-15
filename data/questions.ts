@@ -19,6 +19,7 @@ export const QUESTIONS: Question[] = [
     correctIndex: 1,
     point: 10,
     // image: "/images/q1.jpg",
+    explanation: "あさみは中学時代、剣道部に所属していました。"
   },
   {
     id: 2,
