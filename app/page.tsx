@@ -100,6 +100,10 @@ export default function Home() {
               <p className="text-amber-600 text-sm font-semibold tracking-widest uppercase">Welcome</p>
               <h1 className="text-4xl font-bold text-stone-800">クイズ大会</h1>
               <p className="text-stone-400 text-sm">名前を入力して参加してください</p>
+            <div className="bg-amber-50/80 border border-amber-200 rounded-2xl px-5 py-4 text-sm text-stone-600 text-left space-y-2 mt-2">
+              <p>🎁 <span className="font-semibold text-stone-700">上位2名には景品が用意されているかも…？</span></p>
+              <p>🔒 あなたの回答内容は他の参加者には見えません</p>
+            </div>
             </div>
             <input
               type="text"
@@ -248,7 +252,6 @@ export default function Home() {
                 <span className="text-2xl ml-2 text-amber-600">点</span>
               </p>
             </div>
-            <p className="text-stone-400 text-sm">管理者画面でランキングをご確認ください</p>
           </div>
         )}
 
