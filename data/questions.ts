@@ -39,7 +39,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: 4,
-    text: "とものりが経験したことがないものは？",
+    text: "とものりが習い事で経験したことがないものは？",
     options: ["野球", "ピアノ", "囲碁"],
     correctIndex: 0,
     point: 10,
@@ -47,9 +47,9 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: 5,
-    text: "とものりの好きなハイキューの名言は？",
-    options: ["AAA", "BBB", "CCC"],
-    correctIndex: 0,
+    text: "とものりが今一番したいことは？",
+    options: ["バレーの大会に出る", "焼肉食べ放題", "温泉旅館にいく"],
+    correctIndex: 1,
     point: 10,
     explanation: "正解はAAAです。"
   },

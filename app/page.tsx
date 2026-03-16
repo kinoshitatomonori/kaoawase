@@ -201,12 +201,14 @@ export default function Home() {
                   }`}>
                     {result.correct ? "✓ 正解！" : "✗ 不正解..."}
                   </div>
+                  {/* 解説は一時非表示
                   {currentQ.explanation && (
                     <div className="bg-amber-50/80 border border-amber-200 rounded-2xl px-5 py-4 text-sm text-stone-600 leading-relaxed">
                       <span className="text-amber-700 font-semibold mr-2">解説</span>
                       {currentQ.explanation}
                     </div>
                   )}
+                  */}
                 </div>
               )}
 
