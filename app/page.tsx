@@ -101,8 +101,8 @@ export default function Home() {
               <h1 className="text-4xl font-bold text-stone-800">クイズ大会</h1>
               <p className="text-stone-400 text-sm">名前を入力して参加してください</p>
             <div className="bg-amber-50/80 border border-amber-200 rounded-2xl px-5 py-4 text-sm text-stone-600 text-left space-y-2 mt-2">
-              <p>🎁 <span className="font-semibold text-stone-700">上位2名には景品が用意されているかも…？</span></p>
-              <p>🔒 あなたの回答内容は他の参加者には見えません</p>
+              <p>🎁 <span className="font-semibold text-stone-700">上位2名には景品が用意されているかも</span></p>
+              <p>🔒 皆さんの回答内容は他の方からは見えません</p>
             </div>
             </div>
             <input
